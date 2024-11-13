@@ -1,14 +1,14 @@
 # Use an official Node.js runtime as a parent image
-FROM node:16
+FROM node:18
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the package.json and package-lock.json to install dependencies
-COPY package*.json ./
+# Copy the package.json and yarn.lock to install dependencies
+COPY package.json yarn.lock ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies using Yarn
+RUN yarn install
 
 # Copy the rest of your project files into the container
 COPY . .
@@ -26,5 +26,4 @@ ARG REACT_APP_MEASUREMENT_ID
 EXPOSE 3000
 
 # Command to run your app
-CMD ["npm", "start"]
-
+CMD ["yarn", "start"]
