@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+/* Navbar styles */
+.navbar {
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center; /* Center all items horizontally */
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-link, .navbar-button {
+  color: white;
+  font-size: 16px;
+  padding: 8px 15px; /* Consistent padding for links and button */
+  margin: 0 10px;
+  text-decoration: none; /* Remove underline for links */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensure both links and button take full height */
+}
+
+.navbar-link {
+  background-color: #333; /* Same as navbar background to blend */
+  transition: background-color 0.3s;
+}
+
+.navbar-link:hover {
+  background-color: #555;
+  color: #ddd;
+}
+
+.navbar-button {
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.navbar-button:hover {
+  background-color: #0056b3;
+}
