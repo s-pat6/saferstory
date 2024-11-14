@@ -1,5 +1,8 @@
+/* Apply global styles to prevent horizontal scrolling */
 .App {
   text-align: center;
+  min-height: 100vh;
+  padding-top: 60px; /* Adjust this based on your navbar's height */
 }
 
 .App-logo {
@@ -35,34 +38,34 @@
   to {
     transform: rotate(360deg);
   }
-}
-/* Navbar styles */
+}/* Navbar styles */
 .navbar {
   background-color: #333;
-  padding: 10px 20px;
+  padding: 10px;
   display: flex;
-  justify-content: center; /* Center all items horizontally */
+  justify-content: space-around; /* Spread items evenly across the width */
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%; /* Make navbar take full width */
   z-index: 1000;
+  box-sizing: border-box; /* Include padding in the navbar width */
 }
 
 .navbar-link, .navbar-button {
   color: white;
   font-size: 16px;
-  padding: 8px 15px; /* Consistent padding for links and button */
-  margin: 0 10px;
-  text-decoration: none; /* Remove underline for links */
+  padding: 8px 15px;
+  margin: 0 5px;
+  text-decoration: none;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%; /* Ensure both links and button take full height */
 }
 
 .navbar-link {
-  background-color: #333; /* Same as navbar background to blend */
+  background-color: #333;
   transition: background-color 0.3s;
 }
 
@@ -76,8 +79,25 @@
   border: none;
   cursor: pointer;
   outline: none;
+  transition: background-color 0.3s;
 }
 
 .navbar-button:hover {
   background-color: #0056b3;
 }
+
+  /* Style for the main container */
+  .container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    box-sizing: border-box;
+  }
