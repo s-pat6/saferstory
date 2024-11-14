@@ -1,8 +1,8 @@
-/* Home.css */
 /* General body styling */
 body {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
     overflow-x: hidden; /* Prevent horizontal scroll */
@@ -38,11 +38,12 @@ body {
 
 /* Main content wrapper with top padding to account for fixed navbar */
 .page-wrapper {
-    padding-top: 80px; /* Adjust this padding to create space below the navbar */
+    padding-top: 80px; /* Space for navbar */
     padding-left: 20px;
     padding-right: 20px;
     max-width: 1000px;
     margin: 0 auto; /* Center the content */
+    box-sizing: border-box; /* Ensure padding does not add to overall width */
 }
 
 /* Section styling */
@@ -52,6 +53,8 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Full width for mobile */
+    box-sizing: border-box;
 }
 
 /* Section headers */
@@ -81,15 +84,17 @@ body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .navbar {
-        height: 70px;
+        height: 70px; /* Adjust navbar height */
+        padding: 10px; /* More compact padding */
     }
 
     .page-wrapper {
-        padding-top: 90px; /* Adjust for increased navbar height on smaller screens */
+        padding-top: 90px; /* Additional space for taller navbar */
         padding-left: 10px;
         padding-right: 10px;
+        width: 100%;
     }
 
     .section h3 {
@@ -98,5 +103,27 @@ body {
 
     .section p, .section li {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        height: 70px; /* Adjust navbar height */
+        padding: 10px; /* More compact padding */
+    }
+
+    .page-wrapper {
+        margin-top: 250px; /* Space for larger navbar on mobile */
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+    }
+
+    .section h3 {
+        font-size: 1.2rem;
+    }
+
+    .section p, .section li {
+        font-size: 0.95rem;
     }
 }
