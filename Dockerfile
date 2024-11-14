@@ -20,6 +20,7 @@ RUN yarn build
 EXPOSE 8080
 
 # Use the PORT environment variable if it's set by Railway; fallback to 8080
+ENV NODE_ENV=production
 ENV PORT=8080
 
 CMD ["npx", "serve", "-s", "build", "-l", "8080"]
