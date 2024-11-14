@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@svgr/plugin-svgo": "^6.5.1",
     "@svgr/webpack": "^8.1.0",
