@@ -1,25 +1,26 @@
-# Use a Node.js image to build the app
-FROM node:18 AS builder
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
 
-# Set working directory
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /my-app
 
-# Copy package.json and install dependencies
+# Copy the package.json and yarn.lock to install dependencies
 COPY package.json yarn.lock ./
-RUN yarn install
 
-# Copy the source code and build the app
+# Install dependencies using Yarn
+RUN yarn install --production
+
+# Copy the rest of your project files into the container
 COPY . .
+
+# Build the application
 RUN yarn build
 
-# Use a lightweight web server to serve static files
-FROM node:18-slim
-WORKDIR /app
-RUN yarn global add serve
-
-# Copy the build output from the builder stage
-COPY --from=builder /app/build ./build
-
-# Expose port 3000 and run the app with `serve`
+# Expose the port for Railway
 EXPOSE 8080
-CMD ["serve", "-s", "build", "-l", "8080"]
+
+# Use the PORT environment variable if it's set by Railway; fallback to 8080
+ENV PORT=8080
+
+# Serve the static files using a simple Node server
+CMD ["yarn", "start"]
