@@ -1,0 +1,82 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 15px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .navbar-link:hover {
+    background-color: #555;
+    color: #ddd;
+    border-radius: 5px;
+  }
+
+  .home-container {
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 00px 20px 20px; /* Adjust padding for navbar */
+    background-color: #ffffff; /* Set background color for the container */
+    color: #333333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Start from the top */
+    box-sizing: border-box;
+}
+
+.intro-section, .mission-section, .features-section, .future-features-section {
+    margin-bottom: 1.5rem;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.intro-section h3, .mission-section h3, .features-section h3, .future-features-section h3 {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.intro-section p, .mission-section p, .features-section ul, .future-features-section ul {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555555;
+}
+
+.features-section li, .future-features-section li {
+    font-size: 1rem;
+    color: #555555;
+    margin: 8px 0;
+}
+
+/* Ensure no extra white space at the bottom */
+html, body {
+    height: 100%; /* Ensure body takes up full height */
+}
