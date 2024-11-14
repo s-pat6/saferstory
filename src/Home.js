@@ -1,10 +1,10 @@
-// src/Home.js
+// src/Home.js// src/Home.js
 import React from 'react';
-import './Home.css'; // Make sure you have this CSS file with the styles I provided
+import './Home.css';
 
 function Home({ user }) {
   return (
-    <div>
+    <div className="page-wrapper"> {/* Apply padding to the top of the entire page */}
       {/* Introduction Section */}
       <div className="section intro-section">
         <h3>Welcome to Safer Story</h3>
