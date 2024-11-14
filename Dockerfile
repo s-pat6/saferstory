@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application (this step is often for React/Frontend apps)
-RUN yarn build
+RUN yarn build:production
 
 # Expose the port for Railway
 EXPOSE 8080
@@ -22,5 +22,4 @@ EXPOSE 8080
 # Use the PORT environment variable if it's set by Railway; fallback to 8080
 ENV PORT=8080
 
-# Serve the static files using a simple Node server
-CMD ["yarn", "start"]
+CMD ["npx", "serve", "-s", "build", "-l", "8080"]
