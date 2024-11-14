@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application (this step is often for React/Frontend apps)
-RUN yarn build:production
+RUN yarn build
 
 # Expose the port for Railway
 EXPOSE 8080
