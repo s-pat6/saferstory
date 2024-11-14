@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom';
 import { auth } from './firebase';
 import Login from './Login';
 import Home from './Home';
@@ -8,12 +8,14 @@ import LocationPage from './LocationPage';
 import LocationDisplayPage from './LocationDisplayPage'; // Import the new display component
 
 function Navbar({ user }) {
+  const navigate = useNavigate();
+  
   return (
     <nav className="navbar">
-      <button onClick={() => (window.location.href = "/")} className="navbar-button">
+      <button onClick={() => navigate("/")} className="navbar-button">
         Home
       </button>
-      <button onClick={() => (window.location.href = "/location")} className="navbar-button">
+      <button onClick={() => navigate("/location")} className="navbar-button">
         Location
       </button>
       {user ? (
@@ -21,7 +23,7 @@ function Navbar({ user }) {
           Logout
         </button>
       ) : (
-        <button onClick={() => (window.location.href = "/login")} className="navbar-button">
+        <button onClick={() => navigate("/")} className="navbar-button">
           Login
         </button>
       )}
