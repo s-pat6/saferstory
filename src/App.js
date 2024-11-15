@@ -25,6 +25,9 @@ function Navbar({ user }) {
       <button onClick={() => navigate("/location")} className="navbar-button">
         Location
       </button>
+      <button onClick={() => navigate("/sharelocation")} className="navbar-button">
+        ShareLocation
+      </button>
       {user ? (
         <button onClick={() => auth.signOut()} className="navbar-button">
           Logout
@@ -57,13 +60,12 @@ function App() {
           <Routes>
             {/* Authenticated route for LocationPage */}
             <Route path="/location" element={user ? <Map /> : <ErrorPage />} />
-
+            <Route path="/sharelocation" element={user ? <LocationPage /> : <ErrorPage />} />
             {/* Public route for LocationDisplayPage */}
             <Route
               path="/location/:locationId"
               element={<LocationDisplayPage />}
             />
-
             {/* Authenticated route for Home */}
             <Route path="/" element={user ? <Home user={user} /> : <Login />} />
           </Routes>

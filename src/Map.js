@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
+
 import {
   GoogleMap,
   useLoadScript,
+  Circle,
   Marker,
   DirectionsRenderer,
 } from "@react-google-maps/api";
@@ -3333,25 +3335,32 @@ function Map() {
 
   return (
     <div className="map-container">
+      
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={15}
         ref={mapRef}
       >
-        {coordinates.map((coordinate) => (
-          <Marker
-            position={coordinate}
-            // icon={{
-            //   url: "./light-yellow-circle.png",
-            //   scaledSize: new window.google.maps.Size(30, 30),
-            // }}
+        {coordinates.map((coordinate, index) => (
+          <Circle
+            key={index}
+            center={coordinate}
+            radius={30} // Radius in meters, adjust as needed
+            options={{
+              fillColor: "#FFD700", // Circle color
+              fillOpacity: 0.4,
+              strokeColor: "#FFD700",
+              strokeOpacity: 0.9,
+              strokeWeight: 1,
+            }}
           />
         ))}
         {origin && <Marker position={origin} />}
         {destination && <Marker position={destination} />}
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
+
       <div className="search-container">
         <InputAutocomplete
           label="Origin"

@@ -56,9 +56,6 @@ function Home({ user }) {
           </li>
         </ul>
       </div>
-      <button className="location-button" onClick={goToLocation}>
-        Open Map
-      </button>
     </div>
   );
 }

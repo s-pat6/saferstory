@@ -1,4 +1,3 @@
-// src/LocationDisplayPage.js
 import React, { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { ref, onValue } from "firebase/database";
@@ -6,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "./LocationDisplayPage.css"; // Import the CSS file
 
 // Set up default Leaflet icon URLs
 delete L.Icon.Default.prototype._getIconUrl;
@@ -46,21 +46,20 @@ function LocationDisplayPage() {
   }, [locationId]);
 
   return (
-    <div>
-      {console.log("the map")}
+    <div className="location-display-page">
       <h2>Current Location</h2>
       {location ? (
         <>
-          <p>
+          <p className="location-info">
             Latitude: {location.latitude}, Longitude: {location.longitude}
           </p>
           <MapContainer
             center={[location.latitude, location.longitude]}
             zoom={15}
-            style={{ height: "400px", width: "100%" }}
+            className="map-container"
           >
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              url="https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             <Marker position={[location.latitude, location.longitude]}>
@@ -71,7 +70,7 @@ function LocationDisplayPage() {
       ) : (
         <p>Loading location...</p>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }
