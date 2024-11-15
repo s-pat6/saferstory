@@ -1,5 +1,6 @@
 // src/Home.js// src/Home.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 function Home({ user }) {
@@ -11,7 +12,7 @@ function Home({ user }) {
   };
 
   return (
-    <div className="home-container" className="page-wrapper">
+    <div className="home-container page-wrapper">
       {" "}
       {/* Apply padding to the top of the entire page */}
       {/* Introduction Section */}
