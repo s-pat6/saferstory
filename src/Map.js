@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   GoogleMap,
@@ -22,7 +22,19 @@ const center = {
 };
 
 function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
-  const autocompleteRef = useRef();
+  const autocompleteRef = useRef(null); // Reference for the Autocomplete instance
+  const inputRef = useRef(null); // Reference for the input field itself
+  const inputId = label.toLowerCase().replace(" ", "-"); // Generate a unique id based on the label
+
+  useEffect(() => {
+    // Initialize Google Places Autocomplete
+    if (window.google && window.google.maps && window.google.maps.places) {
+      autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current);
+      
+      // Attach the event listener
+      autocompleteRef.current.addListener("place_changed", handlePlaceChanged);
+    }
+  }, []);
 
   const handlePlaceChanged = () => {
     const place = autocompleteRef.current.getPlace();
@@ -37,15 +49,17 @@ function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
 
   return (
     <div className="input-container">
-      <label>{label}</label>
+      <label htmlFor={inputId}>{label}</label>
       <input
-        ref={autocompleteRef}
+        id={inputId}
+        ref={inputRef} // Attach the ref to the input field
         className="input"
         placeholder={placeholder || ""}
       />
     </div>
   );
 }
+
 
 function Map() {
   const [origin, setOrigin] = useState(null);
@@ -3364,10 +3378,12 @@ function Map() {
       <div className="search-container">
         <InputAutocomplete
           label="Origin"
+          placeholder="enter origin"
           onPlaceSelected={(details) => handlePlaceSelect(details, "origin")}
         />
         <InputAutocomplete
           label="Destination"
+          placeholder="enter destination"
           onPlaceSelected={(details) =>
             handlePlaceSelect(details, "destination")
           }
