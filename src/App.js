@@ -12,6 +12,7 @@ import Home from "./Home";
 import LocationPage from "./LocationPage";
 import LocationDisplayPage from "./LocationDisplayPage"; // Import the new display component
 import Map from "./Map";
+import ErrorPage from "./ErrorPage"; // Import the new ErrorPage component
 
 function Navbar({ user }) {
   const navigate = useNavigate();
@@ -52,17 +53,21 @@ function App() {
       <div className="App">
         <Navbar user={user} />
 
-        <Routes>
-          {/* Home route that requires authentication */}
-          <Route path="/" element={user ? <Home user={user} /> : <Login />} />
-          {/* Routes accessible without authentication */}
-          <Route path="/location" element={<Map />} />
-          <Route
-            path="/location/:locationId"
-            element={<LocationDisplayPage />}
-          />{" "}
-          {/* New route */}
-        </Routes>
+        <div className="container">
+          <Routes>
+            {/* Authenticated route for LocationPage */}
+            <Route path="/location" element={user ? <Map /> : <ErrorPage />} />
+
+            {/* Public route for LocationDisplayPage */}
+            <Route
+              path="/location/:locationId"
+              element={<LocationDisplayPage />}
+            />
+
+            {/* Authenticated route for Home */}
+            <Route path="/" element={user ? <Home user={user} /> : <Login />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

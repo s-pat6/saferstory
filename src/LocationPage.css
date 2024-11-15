@@ -1,10 +1,16 @@
+/* Apply global styles to prevent horizontal scrolling */
+
+
 /* Center the entire content on the page */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
     margin: 0;
+    padding: 0px;
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
   }
@@ -38,15 +44,18 @@ body {
   /* Style for the main container */
   .container {
     background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%;
-    max-width: 400px;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Center content vertically */
+    box-sizing: border-box;
+    padding:0;
+    margin: 0 auto;
+    flex:1;
   }
   
   /* Style for the heading */
@@ -110,4 +119,5 @@ body {
     user-select: none;
   }
    */
+  
   
