@@ -1,7 +1,7 @@
 // src/LocationListPage.js
-import React, { useEffect, useState } from 'react';
-import { db } from './firebase';
-import { ref, onValue } from 'firebase/database';
+import React, { useEffect, useState } from "react";
+import { db } from "./firebase";
+import { ref, onValue } from "firebase/database";
 
 function LocationListPage() {
   const [locations, setLocations] = useState([]);
@@ -14,9 +14,9 @@ function LocationListPage() {
         onValue(locationRef, (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            const locationData = Object.keys(data).map(key => ({
+            const locationData = Object.keys(data).map((key) => ({
               id: key,
-              ...data[key]
+              ...data[key],
             }));
             setLocations(locationData);
           } else {
@@ -35,10 +35,10 @@ function LocationListPage() {
   return (
     <div>
       <h2>Saved Locations</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {locations.length > 0 ? (
         <ul>
-          {locations.map(location => (
+          {locations.map((location) => (
             <li key={location.id}>
               <p>Latitude: {location.latitude}</p>
               <p>Longitude: {location.longitude}</p>
