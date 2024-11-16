@@ -13,6 +13,7 @@ import LocationPage from "./LocationPage";
 import LocationDisplayPage from "./LocationDisplayPage"; // Import the new display component
 import Map from "./Map";
 import ErrorPage from "./ErrorPage"; // Import the new ErrorPage component
+import "./App.css";
 
 function Navbar({ user }) {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Navbar({ user }) {
         Location
       </button>
       <button onClick={() => navigate("/sharelocation")} className="navbar-button">
-        ShareLocation
+        SendLoc.
       </button>
       {user ? (
         <button onClick={() => auth.signOut()} className="navbar-button">
