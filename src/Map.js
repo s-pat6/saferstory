@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import {
   GoogleMap,
   useLoadScript,
-  Circle,
-  Marker,
+  CircleF,
+  MarkerF,
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import "./Map.css";
 
+const MIN_DISTANCE = 100; // Define a minimum distance in meters
 const GOOGLE_API_KEY = "AIzaSyBGeDv6MVSrDfuvcB58eUMglzxR4093h4g";
 
 const libraries = ["places"];
@@ -20,6 +20,7 @@ const center = {
   lat: 30.285,
   lng: -97.7335,
 };
+
 
 function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
   const autocompleteRef = useRef(null); // Reference for the Autocomplete instance
@@ -67,6 +68,9 @@ function Map() {
   const [directions, setDirections] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
+  const [currentLocation, setCurrentLocation] = useState(null); // New state for live location
+  const [following, setFollowing] = useState(false); // New following state
+  const [heading, setHeading] = useState(null); // New state for heading
 
   const coordinates = [
     { lat: 30.3488641004719, lng: -97.6857651034018 },
@@ -3315,10 +3319,48 @@ function Map() {
   });
 
   const mapRef = useRef();
+  const previousHeading = useRef(null);
+
+  // Fetch user's current location on component mount
+  // Fetch user's current location and heading on component mount
+  
+  useEffect(() => {
+    // Watch user's position with high frequency
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude, heading: newHeading } = position.coords;
+        setCurrentLocation({ lat: latitude, lng: longitude });
+        
+        // Update heading only if significant change detected
+        if (newHeading !== null && Math.abs(newHeading - previousHeading.current) > 2) {
+          setHeading(newHeading);
+          previousHeading.current = newHeading;
+        }
+      },
+      (error) => console.error("Error getting user location:", error),
+      { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 } // Low latency settings
+    );
+
+    // Continuously update heading with device orientation
+    const handleDeviceOrientation = (event) => {
+      const { alpha } = event;
+      if (alpha !== null) setHeading(alpha); // Keep heading updated smoothly
+    };
+    window.addEventListener("deviceorientation", handleDeviceOrientation);
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+      window.removeEventListener("deviceorientation", handleDeviceOrientation);
+    };
+  }, []);
+
 
   const handlePlaceSelect = (details, type) => {
-    const set = type === "origin" ? setOrigin : setDestination;
-    set(details);
+    if (type === "origin") {
+      setOrigin(details); // Only set origin when a location is selected
+    } else if (type === "destination") {
+      setDestination(details);
+    }
 
     if (origin && destination) {
       calculateRoute();
@@ -3357,7 +3399,7 @@ function Map() {
         ref={mapRef}
       >
         {coordinates.map((coordinate, index) => (
-          <Circle
+          <CircleF
             key={index}
             center={coordinate}
             radius={30} // Radius in meters, adjust as needed
@@ -3370,15 +3412,32 @@ function Map() {
             }}
           />
         ))}
-        {origin && <Marker position={origin} />}
-        {destination && <Marker position={destination} />}
+        {/* Show a marker at the user's current location */}
+        {center && (
+          <MarkerF 
+            position={currentLocation} 
+            icon={{
+              path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW, // Arrow to show direction
+              scale: 5,
+              rotation: heading, // Rotate to match heading
+              fillColor: "blue",
+              fillOpacity: 0.5,
+              strokeWeight: 2,
+              strokeColor: "blue"
+            }}
+          />
+        )}
+        
+        {origin && <MarkerF position={origin} />}
+        {destination && <MarkerF position={destination} />}
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
 
       <div className="search-container">
         <InputAutocomplete
           label="Origin"
-          placeholder="enter origin"
+          placeholder="Current Location"
+          defaultLocation={currentLocation} // Pass the origin as a default location prop
           onPlaceSelected={(details) => handlePlaceSelect(details, "origin")}
         />
         <InputAutocomplete
