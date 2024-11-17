@@ -13,34 +13,8 @@ import LocationPage from "./LocationPage";
 import LocationDisplayPage from "./LocationDisplayPage"; // Import the new display component
 import Map from "./Map";
 import ErrorPage from "./ErrorPage"; // Import the new ErrorPage component
+import Navbar from "./Navbar";
 import "./App.css";
-
-function Navbar({ user }) {
-  const navigate = useNavigate();
-
-  return (
-    <nav className="navbar">
-      <button onClick={() => navigate("/")} className="navbar-button">
-        Home
-      </button>
-      <button onClick={() => navigate("/location")} className="navbar-button">
-        Location
-      </button>
-      <button onClick={() => navigate("/sharelocation")} className="navbar-button">
-        SendLoc.
-      </button>
-      {user ? (
-        <button onClick={() => auth.signOut()} className="navbar-button">
-          Logout
-        </button>
-      ) : (
-        <button onClick={() => navigate("/")} className="navbar-button">
-          Login
-        </button>
-      )}
-    </nav>
-  );
-}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -54,23 +28,20 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="app-container">
+        <Routes>
+          <Route path="/location" element={user ? <Map /> : <ErrorPage />} />
+          <Route
+            path="/sharelocation"
+            element={user ? <LocationPage /> : <ErrorPage />}
+          />
+          <Route
+            path="/location/:locationId"
+            element={<LocationDisplayPage />}
+          />
+          <Route path="/" element={user ? <Home user={user} /> : <Login />} />
+        </Routes>
         <Navbar user={user} />
-
-        <div className="container">
-          <Routes>
-            {/* Authenticated route for LocationPage */}
-            <Route path="/location" element={user ? <Map /> : <ErrorPage />} />
-            <Route path="/sharelocation" element={user ? <LocationPage /> : <ErrorPage />} />
-            {/* Public route for LocationDisplayPage */}
-            <Route
-              path="/location/:locationId"
-              element={<LocationDisplayPage />}
-            />
-            {/* Authenticated route for Home */}
-            <Route path="/" element={user ? <Home user={user} /> : <Login />} />
-          </Routes>
-        </div>
       </div>
     </Router>
   );

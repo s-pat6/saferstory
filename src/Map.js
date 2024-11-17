@@ -21,7 +21,6 @@ const center = {
   lng: -97.7335,
 };
 
-
 function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
   const autocompleteRef = useRef(null); // Reference for the Autocomplete instance
   const inputRef = useRef(null); // Reference for the input field itself
@@ -30,8 +29,10 @@ function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
   useEffect(() => {
     // Initialize Google Places Autocomplete
     if (window.google && window.google.maps && window.google.maps.places) {
-      autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current);
-      
+      autocompleteRef.current = new window.google.maps.places.Autocomplete(
+        inputRef.current
+      );
+
       // Attach the event listener
       autocompleteRef.current.addListener("place_changed", handlePlaceChanged);
     }
@@ -60,7 +61,6 @@ function InputAutocomplete({ label, placeholder, onPlaceSelected }) {
     </div>
   );
 }
-
 
 function Map() {
   const [origin, setOrigin] = useState(null);
@@ -3323,16 +3323,19 @@ function Map() {
 
   // Fetch user's current location on component mount
   // Fetch user's current location and heading on component mount
-  
+
   useEffect(() => {
     // Watch user's position with high frequency
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude, heading: newHeading } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        
+
         // Update heading only if significant change detected
-        if (newHeading !== null && Math.abs(newHeading - previousHeading.current) > 2) {
+        if (
+          newHeading !== null &&
+          Math.abs(newHeading - previousHeading.current) > 2
+        ) {
           setHeading(newHeading);
           previousHeading.current = newHeading;
         }
@@ -3353,7 +3356,6 @@ function Map() {
       window.removeEventListener("deviceorientation", handleDeviceOrientation);
     };
   }, []);
-
 
   const handlePlaceSelect = (details, type) => {
     if (type === "origin") {
@@ -3391,7 +3393,6 @@ function Map() {
 
   return (
     <div className="map-container">
-      
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -3414,8 +3415,8 @@ function Map() {
         ))}
         {/* Show a marker at the user's current location */}
         {center && (
-          <MarkerF 
-            position={currentLocation} 
+          <MarkerF
+            position={currentLocation}
             icon={{
               path: window.google.maps.SymbolPath.FORWARD_CLOSED_ARROW, // Arrow to show direction
               scale: 5,
@@ -3423,11 +3424,11 @@ function Map() {
               fillColor: "blue",
               fillOpacity: 0.5,
               strokeWeight: 2,
-              strokeColor: "blue"
+              strokeColor: "blue",
             }}
           />
         )}
-        
+
         {origin && <MarkerF position={origin} />}
         {destination && <MarkerF position={destination} />}
         {directions && <DirectionsRenderer directions={directions} />}
@@ -3447,7 +3448,9 @@ function Map() {
             handlePlaceSelect(details, "destination")
           }
         />
-        <button onClick={calculateRoute}>Trace Route</button>
+        <button onClick={calculateRoute} className="map-button">
+          Get Directions
+        </button>
         {distance && duration && (
           <div>
             <p>Distance: {distance}</p>

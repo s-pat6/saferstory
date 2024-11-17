@@ -1,13 +1,13 @@
 /* Login.css */
 
-.container {
+/* .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f0f2f5;
     padding: 20px;
-  }
+  } */
   
   .card {
     max-width: 400px;
@@ -31,7 +31,7 @@
     margin-bottom: 30px;
   }
   
-  .button {
+  .lg-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,7 +47,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .button:hover {
+  .lg-button:hover {
     background-color: #357ae8;
   }
   

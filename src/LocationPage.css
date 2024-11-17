@@ -1,53 +1,10 @@
 /* Apply global styles to prevent horizontal scrolling */
 
-
-/* Center the entire content on the page */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0px;
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-  }
-  
-  /* Navbar styles */
-  .navbar {
-    background-color: #333;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .navbar-link {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 8px 15px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .navbar-link:hover {
-    background-color: #555;
-    color: #ddd;
-    border-radius: 5px;
-  }
-
   /* Style for the main container */
-  .container {
+  .lp-container {
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,10 +13,11 @@ body {
     padding:0;
     margin: 0 auto;
     flex:1;
+    width: 100%;
   }
   
   /* Style for the heading */
-  h2 {
+  .lp-h2 {
     color: #333333;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -90,7 +48,7 @@ body {
   }
   
   /* Style for the button */
-  button {
+  .lp-button {
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
     color: #ffffff;
@@ -102,7 +60,7 @@ body {
     margin-top: 1rem;
   }
   
-  button:hover {
+  .lp-button:hover {
     background-color: #0056b3;
   }
   

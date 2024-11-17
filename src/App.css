@@ -1,54 +1,6 @@
 /* General body styling */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-
-.navbar {
-  background-color: #333;
-  padding: 10px 20px; /* Top/bottom and left/right padding */
+.app-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  width: 100%; /* Use 100% instead of 100vw to avoid overflow */
-  box-sizing: border-box; /* Ensure padding is included in the width */
-  z-index: 1000;
-  height: 60px;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
 }
-
-
-/* Navbar links */
-.navbar-link, .navbar-button {
-  color: white;
-  font-size: 16px;
-  padding: 8px 15px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin: 0 10px; /* Add horizontal margin to create space between buttons */
-  transition: background-color 0.3s;
-}
-
-.navbar-link:hover, .navbar-button:hover {
-  background-color: #555;
-}
-
-/* Responsive styles for small screens */
-@media (max-width: 480px) {
-  .navbar {
-    padding: 4px 6px; /* Reduce padding for smaller screens */
-    height: 50px; /* Adjust height */
-  }
-  
-  .navbar-link, .navbar-button {
-    font-size: 16px; /* Smaller font size */
-    padding: 4px 5px; /* Smaller padding */
-    margin: 0 5px; /* Smaller margin between buttons */
-  }
-}
-

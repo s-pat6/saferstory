@@ -30,7 +30,7 @@
     border-radius: 4px;
   }
   
-  button {
+  .map-button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -42,7 +42,7 @@
     font-size: 16px;
   }
   
-  button:hover {
+  .map-button:hover {
     background-color: #0056b3;
   }
 

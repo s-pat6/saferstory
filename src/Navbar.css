@@ -1,0 +1,61 @@
+.navbar {
+background-color: #333;
+padding: 10px 0; /* Compact appearance */
+display: flex;
+justify-content: space-around; /* Evenly space out nav items */
+align-items: center;
+bottom: 0; /* Place at the bottom of the screen */
+width: 100%;
+box-sizing: border-box; /* Include padding in the total width */
+z-index: 1000;
+height: 60px;
+}
+
+/* Navbar buttons */
+.navbar-button {
+background-color: transparent;
+color: white;
+font-size: 16px;
+text-decoration: none;
+flex: 1; /* Equal space distribution among the buttons */
+text-align: center; /* Center align the text in each button */
+transition: background-color 0.3s;
+padding: 8px 0; /* Top and bottom padding for a better click area */
+border: none; /* Remove default button border */
+position: relative; /* For positioning the divider */
+}
+
+/* Add hover effect */
+.navbar-button:hover {
+background-color: #555;
+}
+
+/* Divider between buttons */
+.navbar-button::after {
+content: "";
+position: absolute;
+right: 0;
+top: 50%;
+transform: translateY(-50%);
+height: 60%; /* Adjust height of the divider as needed */
+width: 1px;
+background-color: white;
+}
+
+/* Remove divider for the last button */
+.navbar-button:last-child::after {
+display: none;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 480px) {
+.navbar {
+    height: 50px; /* Adjust height */
+    padding: 4px 0; /* Reduce padding for smaller screens */
+}
+
+.navbar-button {
+    font-size: 14px; /* Smaller font size */
+    padding: 6px 0; /* Adjusted padding */
+}
+}  
