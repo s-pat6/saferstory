@@ -126,7 +126,7 @@ function LocationPage() {
           <MapContainer
             center={[location.latitude, location.longitude]}
             zoom={13}
-            style={{ height: "300px", width: "100%", margin: "1rem 0" }}
+            style={{ height: "70%", width: "100%", margin: "1rem 0" }}
             dragging={true}
             zoomControl={true}
             scrollWheelZoom={true}

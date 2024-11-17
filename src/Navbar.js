@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "./firebase";
 import "./Navbar.css";
 import { FaHome, FaMapMarkerAlt, FaShare } from "react-icons/fa";
 import { MdAccountCircle, MdNoAccounts } from "react-icons/md";
-export default function Navbar({ user, signOut }) {
+
+export default function Navbar({ user }) {
   const navigate = useNavigate();
 
   return (
@@ -27,11 +23,14 @@ export default function Navbar({ user, signOut }) {
         <FaShare />
       </button>
       {user ? (
-        <button onClick={signOut} className="navbar-button">
+        <button
+          onClick={() => auth.signOut()} // Use auth.signOut() directly here
+          className="navbar-button"
+        >
           <MdNoAccounts />
         </button>
       ) : (
-        <button onClick={() => auth.signOut()} className="navbar-button">
+        <button onClick={() => navigate("/login")} className="navbar-button">
           <MdAccountCircle />
         </button>
       )}

@@ -1,4 +1,12 @@
 /* src/ErrorPage.css */
+.error-page {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+    box-sizing: border-box;
+}
 
 .error-content {
     position: absolute;

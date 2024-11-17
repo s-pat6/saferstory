@@ -1,6 +1,5 @@
 /* Main content wrapper with top padding for navbar */
 .home-container, .page-wrapper {
-    padding-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
     max-width: 1000px;

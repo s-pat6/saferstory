@@ -4,3 +4,13 @@
   flex-direction: column;
   height: 100vh; /* Full viewport height */
 }
+
+.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f6f8;
+  box-sizing: border-box;
+}

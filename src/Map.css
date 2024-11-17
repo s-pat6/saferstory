@@ -7,6 +7,7 @@
     padding-right: 0;
     padding-top: 100px;
     height: 100%;
+    position: relative;
   }
   
   .search-container {
@@ -55,4 +56,4 @@
     border-radius: 4px; /* Optional: Rounded corners */
     display: inline-block; /* Ensures the background only covers the text */
   }
-  
+

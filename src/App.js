@@ -40,6 +40,7 @@ function App() {
             element={<LocationDisplayPage />}
           />
           <Route path="/" element={user ? <Home user={user} /> : <Login />} />
+          <Route path="/login" element={user ? <Home user={user} /> : <Login />} />
         </Routes>
         <Navbar user={user} />
       </div>

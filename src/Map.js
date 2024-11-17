@@ -14,7 +14,7 @@ const GOOGLE_API_KEY = "AIzaSyBGeDv6MVSrDfuvcB58eUMglzxR4093h4g";
 const libraries = ["places"];
 const mapContainerStyle = {
   width: "100%",
-  height: "70vh",
+  height: "100%",
 };
 const center = {
   lat: 30.285,
