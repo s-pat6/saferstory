@@ -42,20 +42,6 @@ function Home({ user }) {
           </li>
         </ul>
       </div>
-      {/* Future Features Section */}
-      <div className="section future-features-section">
-        <h3>Future Features</h3>
-        <ul>
-          <li>
-            Safe Spot Partnerships: Collaborations with local businesses to
-            offer safe places in emergencies.
-          </li>
-          <li>
-            Community Reports: A platform for community-driven safety reports
-            and updates.
-          </li>
-        </ul>
-      </div>
     </div>
   );
 }

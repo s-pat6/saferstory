@@ -2,22 +2,17 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { db } from "./firebase";
 import { ref, push, set, update } from "firebase/database";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import "./LocationPage.css";
-import L from "leaflet"; // Explicitly import leaflet as L for icon creation
-/* src/index.css or src/App.css */
-import "leaflet/dist/leaflet.css";
 
-// Set default Leaflet icon
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-});
+const GOOGLE_API_KEY = "AIzaSyBGeDv6MVSrDfuvcB58eUMglzxR4093h4g";
+const LIBRARIES = ["places", "marker"];
+const mapContainerStyle = {
+  width: "960px",
+  height: "600px",
+  borderRadius: "12px",
+  margin: "1rem 0"
+};
 
 function LocationPage() {
   const [location, setLocation] = useState(null);
@@ -26,6 +21,12 @@ function LocationPage() {
   const [locationId, setLocationId] = useState(
     localStorage.getItem("locationId")
   );
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: GOOGLE_API_KEY,
+    libraries: LIBRARIES,
+    version: "weekly"
+  });
 
   const updateLocationInDatabase = useCallback(
     (position) => {
@@ -123,24 +124,27 @@ function LocationPage() {
           <p className="location-text">
             Latitude: {location.latitude}, Longitude: {location.longitude}
           </p>
-          <MapContainer
-            center={[location.latitude, location.longitude]}
-            zoom={13}
-            style={{ height: "70%", width: "100%", margin: "1rem 0" }}
-            dragging={true}
-            zoomControl={true}
-            scrollWheelZoom={true}
-            doubleClickZoom={true}
-            touchZoom={true}
-          >
-            <TileLayer
-              url="https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            />
-            <Marker position={[location.latitude, location.longitude]}>
-              <Popup>Your Current Location</Popup>
-            </Marker>
-          </MapContainer>
+          {loadError && <p className="error-message">Error loading map</p>}
+          {!isLoaded ? (
+            <p className="location-text">Loading map...</p>
+          ) : (
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={{ lat: location.latitude, lng: location.longitude }}
+              zoom={15}
+              options={{
+                disableDefaultUI: false,
+                clickableIcons: true,
+                scrollwheel: true,
+                mapId: "YOUR_MAP_ID"
+              }}
+            >
+              <MarkerF
+                position={{ lat: location.latitude, lng: location.longitude }}
+                title="Your Current Location"
+              />
+            </GoogleMap>
+          )}
         </>
       ) : (
         <p className="location-text">Loading location...</p>

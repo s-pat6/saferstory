@@ -1,59 +1,134 @@
 .map-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 100px;
-    height: 100%;
-    position: relative;
-  }
-  
-  .search-container {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-  }
-  
-  .input-container {
-    margin-bottom: 10px;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .map-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
-  }
-  
-  .map-button:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #e0e4ea;
+  margin: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
 
-  .marker-label {
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
-    background-color: white; /* White background */
-    padding: 2px 4px; /* Optional: Add padding for better appearance */
-    border-radius: 4px; /* Optional: Rounded corners */
-    display: inline-block; /* Ensures the background only covers the text */
-  }
+.search-container {
+  width: 900px;
+  background: #fff;
+  padding: 20px 32px 16px 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  margin: 32px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: none;
+  overflow: visible;
+}
 
+.input-container {
+  position: relative;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-container label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #222;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.input:focus {
+  border: 1.5px solid #4285F4;
+  outline: none;
+}
+
+.map-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.map-button:hover {
+  background-color: #3367d6;
+}
+
+.marker-label {
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Style gmp-place-autocomplete for desktop look */
+gmp-place-autocomplete {
+  display: block;
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0;
+  font-size: 1rem;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+gmp-place-autocomplete input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+gmp-place-autocomplete input:focus {
+  border: 1.5px solid #4285F4;
+  outline: none;
+}
+
+.pac-container {
+  z-index: 1000 !important;
+  position: absolute !important;
+  width: 100% !important;
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.pac-item {
+  padding: 8px !important;
+  cursor: pointer !important;
+}
+
+.pac-item:hover {
+  background-color: #f5f5f5 !important;
+}
